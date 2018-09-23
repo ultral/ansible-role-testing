@@ -15,7 +15,7 @@ $ kitchen converge common-vagrant -l debug
 ![kitchen-ci schema](schemas/kitchen-ci-schema.png?raw=true "kitchen-ci schema")
 
 # Green Build Policy
-![Green build policy schema](schemas/Green-build-policy?raw=true "Green build policy schema")
+![Green build policy schema](schemas/Green-build-policy.png?raw=true "Green build policy schema")
 
 # Links
 * [Test me if you can. Do YML developers Dream of testing ansible?](http://www.goncharov.xyz/it/test-ansible-roles-via-testkitchen-inside-hyperv.html)
