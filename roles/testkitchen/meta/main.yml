@@ -1,0 +1,7 @@
+---
+
+dependencies:
+  - {role: common}
+  - {role: ansible}
+  - {role: vagrant}
+  - {role: virtualbox}

@@ -1,0 +1,11 @@
+---
+
+- name: ansible is installed
+  yum:
+    name: ansible
+    state: latest
+
+- name: ansible-lint is installed
+  yum:
+    name: ansible-lint
+    state: latest

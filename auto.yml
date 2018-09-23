@@ -1,0 +1,11 @@
+---
+
+- name: provision servers
+  hosts: all
+  become: True
+  become_user: root
+  tasks:
+    - name: show remote_role
+      debug: var=remote_role
+    - name: apply role
+      include_role: name="{{ remote_role }}"

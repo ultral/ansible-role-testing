@@ -1,0 +1,27 @@
+---
+- name: Rpms are installed
+  yum: name="{{ item }}" state=latest
+  with_items:
+    - ruby
+    - libffi
+    - libffi-devel
+    - gcc-c++
+
+- name: install chefdk
+  yum:
+    name: "{{chefdk_url}}"
+    state: present
+
+- name: gems are installed
+  gem:
+    name: "{{ item }}"
+    state: latest
+    executable: /opt/chefdk/embedded/bin/gem
+    user_install: no
+  with_items:
+    - inspec
+    - rake
+    - net-ssh
+    - kitchen-ansible
+    - kitchen-vagrant
+    - kitchen-inspec

@@ -1,0 +1,69 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: ansible_playbook
+  ansible_cfg_path: ansible.cfg
+  ansible_host_key_checking: false
+  ansible_limit: all
+  ansible_sudo: true
+  ansible_verbosity: "<%= ENV['ansible_verbosity'].to_s.empty? ?  '1' : ENV['ansible_verbosity'] %>"
+  ansible_version: latest
+  no_proxy: "<%= ENV['no_proxy'] %>"
+  # example how to set default value if ENV var not exist
+  # http_proxy: "<%= ENV['http_proxy'].to_s.empty? ? 'http://proxy.example.com:3128' : ENV['http_proxy'] %>"
+  http_proxy: "<%= ENV['http_proxy'] %>"
+  https_proxy: "<%= ENV['https_proxy'] %>"
+  playbook: auto.yml
+  roles_path: roles
+  require_ansible_repo: true
+  require_chef_for_busser: false
+  show_command_output: false
+  hosts: all
+
+platforms:
+  - name: vagrant
+    driver_plugin: vagrant
+    driver_config:
+      box: bento/centos-7.4
+      vagrantfiles:
+        - vagrant_kitchen.rb
+      provision: true
+
+transport:
+  max_ssh_sessions: 2
+  connection_retries: 2
+  connection_retry_sleep: 15
+
+verifier:
+  name: inspec
+  sudo_path: true
+  format: junit
+
+suites:
+  - name: common
+    provisioner:
+      extra_vars:
+        remote_role: common
+        # example how to set default value if ENV var not exist
+        # http_proxy: "<%= ENV['http_proxy'].to_s.empty? ? 'http://proxy.example.com:3128' : ENV['http_proxy'] %>"
+    verifier:
+      inspec_tests:
+        - test/integration/common
+
+  - name: ansible
+    provisioner:
+      extra_vars:
+        remote_role: ansible
+    verifier:
+      inspec_tests:
+        - test/integration/ansible
+
+  - name: vagrant
+    provisioner:
+      extra_vars:
+        remote_role: vagrant
+    verifier:
+      inspec_tests:
+        - test/integration/ansible

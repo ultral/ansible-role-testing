@@ -1,0 +1,6 @@
+---
+- name: install EPEL Repository
+  yum: name=epel-release state=latest
+
+- name: essentials are installed
+  yum: name="{{minimal_software}}" state=latest

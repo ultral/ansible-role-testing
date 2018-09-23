@@ -1,0 +1,29 @@
+---
+- name: add repos for virtualbox
+  copy:
+    src: "virtualbox.repo"
+    dest: "/etc/yum.repos.d/virtualbox.repo"
+
+- name: install rpms for virtualbox
+  yum:
+    name="{{ item }}"
+    state=latest
+    update_cache=yes
+  with_items:
+    - binutils
+    - qt
+    - gcc
+    - make
+    - patch
+    - libgomp
+    - glibc-headers
+    - glibc-devel
+    - kernel-headers
+    - kernel-devel
+    - dkms
+    - git
+    - VirtualBox-5.2
+
+- name: add kmod for virtualbox
+  command: /sbin/rcvboxdrv setup
+  ignore_errors: yes

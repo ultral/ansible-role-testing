@@ -1,0 +1,33 @@
+Vagrant.configure('2') do |config|
+  unless ENV['http_proxy'].nil?
+    config.proxy.enabled  = true
+    config.proxy.http     = ENV['http_proxy']
+    config.proxy.https    = ENV['http_proxy']
+    config.proxy.no_proxy = ENV['no_proxy']
+  end
+
+  config.ssh.insert_key = false
+  config.vm.box = 'bento/centos-7.4'
+  config.vm.synced_folder '../',
+                          '/vagrant',
+                          type: 'rsync',
+                          rsync__exclude: ['.git/', '.vagrant/']
+  config.vm.provision 'ansible_local' do |ansible|
+    ansible.playbook    = '/vagrant/auto.yml'
+    ansible.extra_vars  = { remote_role: 'testkitchen' }
+  end
+
+  config.vm.provider 'hyperv' do |h|
+    h.vm_integration_services = {
+      guest_service_interface: true,
+      heartbeat: true,
+      key_value_pair_exchange: true,
+      shutdown: true,
+      time_synchronization: true,
+      vss: true
+    }
+    h.memory = 4096
+    h.vmname = 'testkitchen'
+    h.enable_virtualization_extensions = true
+  end
+end

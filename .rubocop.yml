@@ -1,0 +1,12 @@
+---
+
+AllCops:
+  Include:
+    - '**/*.rb'
+    - '**/Vagrantfile'
+
+Metrics/LineLength:
+  Max: 150
+
+Layout/EndOfLine:
+  EnforcedStyle: lf

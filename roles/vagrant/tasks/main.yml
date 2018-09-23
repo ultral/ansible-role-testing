@@ -1,0 +1,9 @@
+---
+
+- name: install vagrant
+  yum:
+    name: "{{vagrant_rpm}}"
+    state: present
+
+- name: install libvirt plugin
+  command: vagrant plugin install vagrant-proxyconf

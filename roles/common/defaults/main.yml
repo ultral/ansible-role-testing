@@ -1,0 +1,19 @@
+---
+minimal_software:
+    - sudo
+    - git
+    - telnet
+    - curl
+    - wget
+    - vim
+    - libselinux-python
+    - policycoreutils-python
+    - mc
+    - htop
+    - iftop
+    - atop
+    - iotop
+    - strace
+    - lsof
+    - sysstat
+    - unzip
