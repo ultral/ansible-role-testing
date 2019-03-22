@@ -19,7 +19,7 @@ $ kitchen converge common-vagrant -l debug
 
 # Links
 * [Test me if you can. Do YML developers Dream of testing ansible?](http://www.goncharov.xyz/it/test-ansible-roles-via-testkitchen-inside-hyperv.html)
-* [presentation](https://cloud.mail.ru/public/2Rc8/EywUuHHp2)
+* [presentation](https://cloud.mail.ru/public/DBuA/7sEMAMRyH)
 * [simple example](https://github.com/ultral/ansible-role-testing)
 * [http://kitchen.ci/](http://kitchen.ci/)
 * [https://t.me/pro_ansible](https://t.me/pro_ansible)
